@@ -1,14 +1,14 @@
-#### Install Docker on the node1
+#### Install Docker on the preferred node
 `apt update -y && apt-get install docker.io -y`
 
-#### Two pieces of Docker. The client and the server. They are decoupled.
+#### There are client and the server of Docker, decoupled.
 `docker version` or `docker info`
-#### Setup Aliases
+#### Setup Aliases, eg
 `alias d='sudo docker'`
 `alias stopdocks='docker stop $(docker ps -a -q)'`
 `alias rmdocks='docker rm $(docker ps -a -q)'`
 
-#### Download our First Image
+#### Download First Image
 Check to see current images or search them:
 
 `docker images` / `docker search <name>`
@@ -24,14 +24,12 @@ See that no docker containers are running:
 `docker ps -a`
 
 Start a container: `docker run -it ubuntu:14.04`
-Get a service to run within a container: ``apt-get update -y && apt-get install python -y`
 
-To `exit`.
+Get a service to run within a container: `apt-get update -y && apt-get install python -y`
 
-See that the container stopped: `docker ps -a`
+To `exit`. See that the container stopped: `docker ps -a`
 
-Start a container in detached mode: `docker run -d -it ubuntu:14.04`
-And check it out: `docker ps -a`
+Start a container in detached mode: `docker run -d -it ubuntu:14.04` And check it out: `docker ps -a`
 To attach: `docker attach <container id>`
 
 Commit the image: `docker commit <container id> ubuntu:python`
@@ -57,10 +55,9 @@ Managing containers:
 
 Using docker logs: 
 
-`docker attach test
-ls -l
-exit
-docker logs test`
+`docker attach test`
+`ls -l` `exit`
+`docker logs test`
 
 #### Inspection + Filtering:
 
@@ -69,8 +66,11 @@ docker logs test`
 or
 
 `docker inspect -f '{{.Config.Image}}' web01`
+
 `docker inspect -f '{{.Config.Env}}' web01`
+
 `docker inspect -f '{{.Mounts}}' db`
+
 `docker inspect -f '{{.State.Pid}}' test2`
 
 or Advanced filter to loop through interfaces and reveal IP address:
@@ -113,14 +113,14 @@ Install compose on a necessary node:
 
 `sudo apt-get install docker-compose -y` | `sudo docker-compose version`
 
-Creat a docker-compose.yml and then:
+Create a docker-compose.yml and then:
 
 `sudo docker-compose up -d`
 
 Check it out: `sudo docker-compose ps` | `sudo docker-compose images` | `curl localhost:5000`
 
 See the logs:   `sudo docker-compose logs`
-Sacle it up: `sudo docker-compose up -d --scale db=2`
+Scale it up: `sudo docker-compose up -d --scale db=2`
 
 #### Swarm
 
@@ -137,15 +137,5 @@ Create a service:
 Check it: `sudo docker service ls` | `sudo docker node ps` | `sudo docker node ps node2`
 
 Scale: `sudo docker service scale pingdocker=2`
-
-
-
-
-
-
-
-
-
-
 
 
